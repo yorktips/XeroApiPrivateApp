@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/*
+ *  Copyright 2011 Ross Jourdain
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ */
+-->
+<!--
+/*
+ *  Change the status attribute on the validation types to 'validationStatus' as
+ *  it clashes with the document status element of main object types e.g. Invoices
+ *
+ */
+-->
+<jxb:bindings xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+              xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance"
+              jxb:extensionBindingPrefixes="inheritance"
+              jxb:version="2.0">
+    <jxb:bindings schemaLocation="Payment.xsd" node="/xsd:schema">
+        <jxb:bindings node="//xsd:complexType[@name='Payment']">
+            <inheritance:implements>com.rossjourdain.util.xero.DataContractBase</inheritance:implements>
+            <jxb:bindings node="./xsd:attribute[@name='status']">
+                <jxb:property name="validationStatus"/>
+            </jxb:bindings>
+        </jxb:bindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="Tracking.xsd" node="/xsd:schema">
+        <jxb:bindings node="//xsd:complexType[@name='TrackingCategory']">
+            <inheritance:implements>com.rossjourdain.util.xero.DataContractBase</inheritance:implements>
+            <jxb:bindings node="./xsd:attribute[@name='status']">
+                <jxb:property name="validationStatus"/>
+            </jxb:bindings>
+        </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='TrackingCategoryOption']">
+            <jxb:bindings node="./xsd:attribute[@name='status']">
+                <jxb:property name="validationStatus"/>
+            </jxb:bindings>
+        </jxb:bindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="TaxRate.xsd" node="/xsd:schema">
+        <jxb:bindings node="//xsd:complexType[@name='TaxRate']">
+            <inheritance:implements>com.rossjourdain.util.xero.DataContractBase</inheritance:implements>
+            <jxb:bindings node="./xsd:attribute[@name='status']">
+                <jxb:property name="validationStatus"/>
+            </jxb:bindings>
+        </jxb:bindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="Receipt.xsd" node="/xsd:schema">
+        <jxb:bindings node="//xsd:complexType[@name='Receipt']">
+            <inheritance:implements>com.rossjourdain.util.xero.DataContractBase</inheritance:implements>
+            <jxb:bindings node="./xsd:attribute[@name='status']">
+                <jxb:property name="validationStatus"/>
+            </jxb:bindings>
+        </jxb:bindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="Employee.xsd" node="/xsd:schema">
+        <jxb:bindings node="//xsd:complexType[@name='Employee']">
+            <inheritance:implements>com.rossjourdain.util.xero.DataContractBase</inheritance:implements>
+            <jxb:bindings node="./xsd:attribute[@name='status']">
+                <jxb:property name="validationStatus"/>
+            </jxb:bindings>
+        </jxb:bindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="CreditNote.xsd" node="/xsd:schema">
+        <jxb:bindings node="//xsd:complexType[@name='CreditNote']">
+            <inheritance:implements>com.rossjourdain.util.xero.DataContractBase</inheritance:implements>
+            <jxb:bindings node="./xsd:attribute[@name='status']">
+                <jxb:property name="validationStatus"/>
+            </jxb:bindings>
+        </jxb:bindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="ExpenseClaim.xsd" node="/xsd:schema">
+        <jxb:bindings node="//xsd:complexType[@name='ExpenseClaim']">
+            <inheritance:implements>com.rossjourdain.util.xero.DataContractBase</inheritance:implements>
+            <jxb:bindings node="./xsd:attribute[@name='status']">
+                <jxb:property name="validationStatus"/>
+            </jxb:bindings>
+        </jxb:bindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="Invoice.xsd" node="/xsd:schema">
+        <jxb:bindings node="//xsd:complexType[@name='Invoice']">
+            <inheritance:implements>com.rossjourdain.util.xero.DataContractBase</inheritance:implements>
+            <jxb:bindings node="./xsd:attribute[@name='status']">
+                <jxb:property name="validationStatus"/>
+            </jxb:bindings>
+        </jxb:bindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="ManualJournal.xsd" node="/xsd:schema">
+        <jxb:bindings node="//xsd:complexType[@name='ManualJournal']">
+            <inheritance:implements>com.rossjourdain.util.xero.DataContractBase</inheritance:implements>
+            <jxb:bindings node="./xsd:attribute[@name='status']">
+                <jxb:property name="validationStatus"/>
+            </jxb:bindings>
+        </jxb:bindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="BankTransaction.xsd" node="/xsd:schema">
+        <jxb:bindings node="//xsd:complexType[@name='BankTransaction']">
+            <inheritance:implements>com.rossjourdain.util.xero.DataContractBase</inheritance:implements>
+            <jxb:bindings node="./xsd:attribute[@name='status']">
+                <jxb:property name="validationStatus"/>
+            </jxb:bindings>
+        </jxb:bindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="Account.xsd" node="/xsd:schema">
+        <jxb:bindings node="//xsd:complexType[@name='Account']">
+            <inheritance:implements>com.rossjourdain.util.xero.DataContractBase</inheritance:implements>
+            <jxb:bindings node="./xsd:attribute[@name='status']">
+                <jxb:property name="validationStatus"/>
+            </jxb:bindings>
+        </jxb:bindings>
+    </jxb:bindings>
+</jxb:bindings>
