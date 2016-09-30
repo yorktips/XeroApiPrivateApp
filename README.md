@@ -1,7 +1,9 @@
 1. Create private key file:
+
    openssl genrsa -out xero_privatekey.pem 1024
 
 2. Create public key file:
+
    openssl req -newkey rsa:1024 -x509 -key xero_privatekey.pem -out xero_publickey.cer -days 365
    
 3. Register your consumer key and secret in XERO Development site:
