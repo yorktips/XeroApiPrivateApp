@@ -33,16 +33,17 @@
                 <artifactId>maven-jaxb2-plugin</artifactId>
                 <executions>
                     <execution>
+                    	<phase>none</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <generatePackage>com.rossjourdain.util.xero</generatePackage>
+                            <generatePackage>com.isis.util.xero</generatePackage>
                             <schemaIncludes>
-                                <include>XeroSchemas/v4.00/*.xsd</include>
+                                <include>XeroSchemas/v2.00/*.xsd</include>
                             </schemaIncludes>
                             <bindingIncludes>
-                                <include>XeroSchemas/v4.00/*.xjb</include>
+                                <include>XeroSchemas/v2.00/*.xjb</include>
                             </bindingIncludes>
                             <extension>true</extension>
                             <args>

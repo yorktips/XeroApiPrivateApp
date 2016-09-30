@@ -1,4 +1,4 @@
-package com.rossjourdain.util.xero;
+package com.isis.util.xero;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
