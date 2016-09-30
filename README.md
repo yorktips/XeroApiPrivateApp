@@ -3,19 +3,20 @@
 
 2. Create public key file:
    openssl req -newkey rsa:1024 -x509 -key xero_privatekey.pem -out xero_publickey.cer -days 365
-
+   
 3. Register your consumer key and secret in XERO Development site:
-   https://app.xero.com/Application
+      https://app.xero.com/Application
 
-     OAuth Credentials
-     Consumer Key
-       RE••••••••••••••••••••••••••FR
-     Consumer Secret
-       SP••••••••••••••••••••••••••NM
-      
-     Regenerate Key and SecretNote, For Private applications, the consumer 
-     token and secret are also used as the access token and secret.  
-     API Endpoint URL: https://api.xero.com/api.xro/2.0/
+      OAuth Credentials
+      Consumer Key
+         RE••••••••••••••••••••••••••FR
+       
+      Consumer Secret
+         SP••••••••••••••••••••••••••NM
+
+      Regenerate Key and SecretNote, For Private applications, the consumer 
+      token and secret are also used as the access token and secret.  
+      API Endpoint URL: https://api.xero.com/api.xro/2.0/
 
 4. Put your private key into: privateKey.pem
 
