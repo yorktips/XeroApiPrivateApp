@@ -20,6 +20,9 @@
       token and secret are also used as the access token and secret.  
       API Endpoint URL: https://api.xero.com/api.xro/2.0/
 
-4. Put your private key into: privateKey.pem
+4. Upload the xero_publickey.cer to  https://app.xero.com/Application
+      Upload a new Public Key Certificate
+ 
+5. Put your private key into: privateKey.pem
 
-5. Put your consumer key and secret into: xeroApi.properties
+6. Put your consumer key and secret into: xeroApi.properties
