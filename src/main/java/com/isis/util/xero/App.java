@@ -24,7 +24,8 @@ public class App {
         // Retrieve a list of Invoices
         try {
 
-            ArrayOfInvoice arrayOfExistingInvoices = xeroClient.getInvoices();
+            //ArrayOfInvoice arrayOfExistingInvoices = xeroClient.getInvoices();
+            ArrayOfInvoice arrayOfExistingInvoices=xeroClient.getDataBeans(new ArrayOfInvoice());
             if (arrayOfExistingInvoices != null && arrayOfExistingInvoices.getInvoice() != null) {
 
                 System.out.println("");
@@ -39,6 +40,24 @@ public class App {
                 }
             }
 
+            ArrayOfContact arrayOfExistingContacts=xeroClient.getDataBeans(new ArrayOfContact());
+            if (arrayOfExistingContacts != null && arrayOfExistingContacts.getContact() != null) {
+
+                System.out.println("");
+                for (Contact contact : arrayOfExistingContacts.getContact()) {
+                    System.out.println("Contact: " + contact.getContactID() + ";name=" + contact.getName());
+                }
+            }
+
+            ArrayOfAccount arrayOfExistingAccounts=xeroClient.getDataBeans(new ArrayOfAccount());
+            if (arrayOfExistingAccounts != null && arrayOfExistingAccounts.getAccount() != null) {
+
+                System.out.println("");
+                for (Account account : arrayOfExistingAccounts.getAccount()) {
+                    System.out.println("Account: " + account.getAccountID() + ";name=" + account.getName());
+                }
+            }
+            
         } catch (XeroClientException ex) {
             ex.printDetails();
         } catch (XeroClientUnexpectedException ex) {
@@ -53,6 +72,7 @@ public class App {
             List<Invoice> invoices = arrayOfInvoice.getInvoice();
             invoice = new Invoice();
 
+            
             Contact contact = new Contact();
             contact.setName("Jane Smith");
             contact.setEmailAddress("jane@smith.com");
@@ -81,7 +101,7 @@ public class App {
             invoice.setStatus(InvoiceStatus.AUTHORISED);
             invoices.add(invoice);
 
-            xeroClient.postInvoices(arrayOfInvoice);
+            xeroClient.postBeans(arrayOfInvoice);
         } catch (XeroClientException ex) {
             ex.printDetails();
         } catch (XeroClientUnexpectedException ex) {
@@ -93,7 +113,6 @@ public class App {
 
             ArrayOfContact arrayOfContact = new ArrayOfContact();
             List<Contact> contacts = arrayOfContact.getContact();
-
 
             Contact contact1 = new Contact();
             contact1.setName("John Smith");
