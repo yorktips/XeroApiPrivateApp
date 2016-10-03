@@ -58,78 +58,6 @@ public class XeroClient {
         return accessor;
     }
 
-//    public ArrayOfInvoice getInvoices() throws XeroClientException, XeroClientUnexpectedException {
-//        ArrayOfInvoice arrayOfInvoices = null;
-//        try {
-//            OAuthClient client = new OAuthClient(new HttpClient3());
-//            OAuthAccessor accessor = buildAccessor();
-//            OAuthMessage response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Invoices", null);
-//            arrayOfInvoices = XeroXmlManager.xmlToInvoices(response.getBodyAsStream());
-//        } catch (OAuthProblemException ex) {
-//            throw new XeroClientException("Error getting invoices", ex);
-//        } catch (Exception ex) {
-//            throw new XeroClientUnexpectedException("", ex);
-//        }
-//        return arrayOfInvoices;
-//    }
-
-//    public <T> T getDataBeans() throws XeroClientException, XeroClientUnexpectedException {
-//    	
-//        T arrayOfT = null;
-//        OAuthMessage response = null;
-//        try {
-//            OAuthClient client = new OAuthClient(new HttpClient3());
-//            OAuthAccessor accessor = buildAccessor();
-//
-//            //response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Invoices", null);
-//            if (arrayOfT instanceof  ArrayOfInvoice) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Invoices", null);
-//            }else if (arrayOfT instanceof  ArrayOfContact) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Contacts", null);
-//            }else if (arrayOfT instanceof  ArrayOfTaxRate) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "TaxRates", null);
-//            }else if (arrayOfT instanceof  ArrayOfAccount) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Accounts", null);
-//            }else if (arrayOfT instanceof  ArrayOfTrackingCategory) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "TrackingCategories", null);
-//            }else if (arrayOfT instanceof  ArrayOfOrganisation) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Organisations", null);
-//            }else if (arrayOfT instanceof  ArrayOfCreditNote) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "CreditNotes", null);
-//            }else if (arrayOfT instanceof  ArrayOfCurrency) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Currencies", null);
-//            }else if (arrayOfT instanceof  ArrayOfPayment) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Payments", null);
-//            }else if (arrayOfT instanceof  ArrayOfBrandingTheme) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "BrandingThemes", null);
-//            }else if (arrayOfT instanceof  ArrayOfItem) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Items", null);
-//            }else if (arrayOfT instanceof  ArrayOfManualJournal) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "ManualJournals", null);
-//            }else if (arrayOfT instanceof  ArrayOfReport) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Reports", null);
-//            }else if (arrayOfT instanceof  ArrayOfEmployee) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Employees", null);
-//            }else if (arrayOfT instanceof  ArrayOfAttachment) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Attachments", null);
-//            }else if (arrayOfT instanceof  ArrayOfBankTransaction) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "BankTransactions", null);
-//            }else if (arrayOfT instanceof  ArrayOfUser) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Users", null);
-//            }else if (arrayOfT instanceof  ArrayOfReceipt) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Receipts", null);
-//            }else if (arrayOfT instanceof  ArrayOfExpenseClaim) { 
-//            	response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "ExpenseClaims", null);
-//            }            
-//            
-//            arrayOfT = XeroXmlManager.xmlToBeans(response.getBodyAsStream());
-//        } catch (OAuthProblemException ex) {
-//            throw new XeroClientException("Error getting invoices", ex);
-//        } catch (Exception ex) {
-//            throw new XeroClientUnexpectedException("", ex);
-//        }
-//        return arrayOfT;
-//    }
 
     public <T> T getDataBeans(T t) throws XeroClientException, XeroClientUnexpectedException {
     	return getDataBean(t,null);
@@ -195,28 +123,6 @@ public class XeroClient {
         return arrayOfT;
     }
     
-//    public <T> T getDataBean(String reportUrl) throws XeroClientException, XeroClientUnexpectedException {
-//        T t = null;
-//        try {
-//            OAuthClient client = new OAuthClient(new HttpClient3());
-//            OAuthAccessor accessor = buildAccessor();
-//            OAuthMessage response = null;
-//            
-//            response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Reports" + reportUrl, null);
-//            ResponseType responseType = XeroXmlManager.xmlToResponse(response.getBodyAsStream());
-//            if (responseType != null && responseType.getReports() != null
-//                    && responseType.getReports().getReport() != null && responseType.getReports().getReport().size() > 0) {
-//                t = (T)(responseType.getReports().getReport().get(0));
-//            }
-//            
-//        } catch (OAuthProblemException ex) {
-//            throw new XeroClientException("Error getting invoices", ex);
-//        } catch (Exception ex) {
-//            throw new XeroClientUnexpectedException("", ex);
-//        }
-//        return t;
-//    }
-//    
     public Report getReport(String reportUrl) throws XeroClientException, XeroClientUnexpectedException {
         Report report = null;
         try {
@@ -289,45 +195,7 @@ public class XeroClient {
             throw new XeroClientUnexpectedException("", ex);
         }
     }  
-    
-    public void postContacts(ArrayOfContact arrayOfContact) throws XeroClientException, XeroClientUnexpectedException {
-        try {
-            String contactsString = XeroXmlManager.contactsToXml(arrayOfContact);
-            OAuthClient client = new OAuthClient(new HttpClient3());
-            OAuthAccessor accessor = buildAccessor();
-            OAuthMessage response = client.invoke(accessor, OAuthMessage.POST, endpointUrl + "Contacts", OAuth.newList("xml", contactsString));
-        } catch (OAuthProblemException ex) {
-            throw new XeroClientException("Error posting contancts", ex);
-        } catch (Exception ex) {
-            throw new XeroClientUnexpectedException("", ex);
-        }
-    }
 
-    public void postInvoices(ArrayOfInvoice arrayOfInvoices) throws XeroClientException, XeroClientUnexpectedException {
-        try {
-            OAuthClient client = new OAuthClient(new HttpClient3());
-            OAuthAccessor accessor = buildAccessor();
-            String contactsString = XeroXmlManager.invoicesToXml(arrayOfInvoices);
-            OAuthMessage response = client.invoke(accessor, OAuthMessage.POST, endpointUrl + "Invoices", OAuth.newList("xml", contactsString));
-        } catch (OAuthProblemException ex) {
-            throw new XeroClientException("Error posting invoices", ex);
-        } catch (Exception ex) {
-            throw new XeroClientUnexpectedException("", ex);
-        }
-    }
-
-    public void postPayments(ArrayOfPayment arrayOfPayment) throws XeroClientException, XeroClientUnexpectedException {
-        try {
-            OAuthClient client = new OAuthClient(new HttpClient3());
-            OAuthAccessor accessor = buildAccessor();
-            String paymentsString = XeroXmlManager.paymentsToXml(arrayOfPayment);
-            OAuthMessage response = client.invoke(accessor, OAuthMessage.POST, endpointUrl + "Payments", OAuth.newList("xml", paymentsString));
-        } catch (OAuthProblemException ex) {
-            throw new XeroClientException("Error posting payments", ex);
-        } catch (Exception ex) {
-            throw new XeroClientUnexpectedException("", ex);
-        }
-    }
 
     public File getInvoiceAsPdf(String invoiceId) throws XeroClientException, XeroClientUnexpectedException {
 
@@ -343,7 +211,6 @@ public class XeroClient {
             OAuthMessage request = accessor.newRequestMessage(OAuthMessage.GET, endpointUrl + "Invoices" + "/" + invoiceId, null);
             request.getHeaders().add(new OAuth.Parameter("Accept", "application/pdf"));
             OAuthResponseMessage response = client.access(request, ParameterStyle.BODY);
-
 
             file = new File("Invoice-" + invoiceId + ".pdf");
 
