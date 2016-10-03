@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+
 import net.oauth.OAuth;
 import net.oauth.OAuthAccessor;
 import net.oauth.OAuthConsumer;
@@ -21,7 +22,7 @@ public class XeroClient {
 
     private String endpointUrl;
     private String consumerKey;
-    private String consumerSecret;
+    private String consumerSecret; 
     private String privateKey;
 
     public XeroClient(String endpointUrl, String consumerKey, String consumerSecret, String privateKey) {
@@ -197,6 +198,76 @@ public class XeroClient {
     }  
 
 
+	public File getInvoiceAsPdfByInvNum(String invoiceNum)
+			throws XeroClientException, XeroClientUnexpectedException {
+
+		String invoiceId = "";
+		ArrayOfInvoice arrayOfExistingInvoices = getDataBeans(new ArrayOfInvoice());
+
+		if (arrayOfExistingInvoices != null
+				&& arrayOfExistingInvoices.getInvoice() != null) {
+			for (Invoice invoice : arrayOfExistingInvoices.getInvoice()) {
+				if (invoice.getInvoiceNumber().equalsIgnoreCase(invoiceNum)) {
+					invoiceId = invoice.getInvoiceID();
+					break;
+				}
+			}
+		}
+
+		if (invoiceId.isEmpty()) return null;
+		
+        File file = null;
+        InputStream in = null;
+        FileOutputStream out = null;
+
+        try {
+
+            OAuthClient client = new OAuthClient(new HttpClient3());
+            OAuthAccessor accessor = buildAccessor();
+
+            OAuthMessage request = accessor.newRequestMessage(OAuthMessage.GET, endpointUrl + "Invoices" + "/" + invoiceId, null);
+            request.getHeaders().add(new OAuth.Parameter("Accept", "application/pdf"));
+            OAuthResponseMessage response = client.access(request, ParameterStyle.BODY);
+
+            file = new File(invoiceNum + ".pdf");
+
+            if (response != null && response.getHttpResponse() != null && (response.getHttpResponse().getStatusCode() / 2) != 2) {
+                in = response.getBodyAsStream();
+                out = new FileOutputStream(file);
+
+                byte[] buffer = new byte[1024];
+                int bytesRead = 0;
+                while ((bytesRead = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, bytesRead);
+                }
+            } else {
+                throw response.toOAuthProblemException();
+            }
+
+        } catch (OAuthProblemException ex) {
+            throw new XeroClientException("Error getting PDF of invoice " + invoiceId, ex);
+        } catch (Exception ex) {
+            throw new XeroClientUnexpectedException("", ex);
+        } finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (IOException ex) {
+            }
+            try {
+                if (out != null) {
+                    out.flush();
+                    out.close();
+                }
+            } catch (IOException ex) {
+            }
+        }
+
+		return file;
+	}
+    
+	
     public File getInvoiceAsPdf(String invoiceId) throws XeroClientException, XeroClientUnexpectedException {
 
         File file = null;
