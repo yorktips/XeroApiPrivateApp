@@ -6,12 +6,12 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
-
 public class App {
-
 	
     public static void main(String[] args) {
 
+    	
+    	
         // Prepare the Xero Client
         XeroClient xeroClient = null;
         Account account=null;
@@ -28,13 +28,18 @@ public class App {
         // Retrieve a list of Invoices
         try {
 
+        	
+        	String invoiceNum="INV-API-AIREUS-005";
+        	xeroClient.getInvoiceAsPdfByInvNum(invoiceNum);
+        	
             //ArrayOfInvoice arrayOfExistingInvoices = xeroClient.getInvoices();
             ArrayOfInvoice arrayOfExistingInvoices=xeroClient.getDataBeans(new ArrayOfInvoice());
             if (arrayOfExistingInvoices != null && arrayOfExistingInvoices.getInvoice() != null) {
 
                 System.out.println("");
                 for (Invoice invoice : arrayOfExistingInvoices.getInvoice()) {
-                    System.out.println("Invoice: " + invoice.getInvoiceID());
+                    System.out.println("Invoice: id=" + invoice.getInvoiceID() + ";InvNum="+ invoice.getInvoiceNumber());
+                    
                 }
 
                 // Retrieve an invoice as a PDF 
@@ -69,7 +74,7 @@ public class App {
             ex.printStackTrace();
         }
 
-        String InvoiceNumber="";
+        String InvoiceNumber="INV-API-008";
         // Create an Invoice
         Invoice invoice = null;
         try {
@@ -77,7 +82,6 @@ public class App {
             ArrayOfInvoice arrayOfInvoice = new ArrayOfInvoice();
             List<Invoice> invoices = arrayOfInvoice.getInvoice();
             invoice = new Invoice();
-            InvoiceNumber="INV-API-006";
             invoice.setContact(contact);
 
             ArrayOfLineItem arrayOfLineItem = new ArrayOfLineItem();
@@ -116,12 +120,12 @@ public class App {
         // Add a payment to an exisiting Invoice
         try {
             Invoice invoice1 = new Invoice();
-            invoice1.setInvoiceNumber("INV-API-006");
+            invoice1.setInvoiceNumber(InvoiceNumber);
 
             account = new Account();
             account.setCode("880");//account.getCode());
 
-            Payment payment = new Payment();
+            Payment payment = new Payment(); 
             payment.setAccount(account);
             payment.setInvoice(invoice1);
             payment.setAmount(new BigDecimal("300.00"));
