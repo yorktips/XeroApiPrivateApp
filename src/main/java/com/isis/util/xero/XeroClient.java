@@ -58,20 +58,20 @@ public class XeroClient {
         return accessor;
     }
 
-    public ArrayOfInvoice getInvoices() throws XeroClientException, XeroClientUnexpectedException {
-        ArrayOfInvoice arrayOfInvoices = null;
-        try {
-            OAuthClient client = new OAuthClient(new HttpClient3());
-            OAuthAccessor accessor = buildAccessor();
-            OAuthMessage response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Invoices", null);
-            arrayOfInvoices = XeroXmlManager.xmlToInvoices(response.getBodyAsStream());
-        } catch (OAuthProblemException ex) {
-            throw new XeroClientException("Error getting invoices", ex);
-        } catch (Exception ex) {
-            throw new XeroClientUnexpectedException("", ex);
-        }
-        return arrayOfInvoices;
-    }
+//    public ArrayOfInvoice getInvoices() throws XeroClientException, XeroClientUnexpectedException {
+//        ArrayOfInvoice arrayOfInvoices = null;
+//        try {
+//            OAuthClient client = new OAuthClient(new HttpClient3());
+//            OAuthAccessor accessor = buildAccessor();
+//            OAuthMessage response = client.invoke(accessor, OAuthMessage.GET, endpointUrl + "Invoices", null);
+//            arrayOfInvoices = XeroXmlManager.xmlToInvoices(response.getBodyAsStream());
+//        } catch (OAuthProblemException ex) {
+//            throw new XeroClientException("Error getting invoices", ex);
+//        } catch (Exception ex) {
+//            throw new XeroClientUnexpectedException("", ex);
+//        }
+//        return arrayOfInvoices;
+//    }
 
 //    public <T> T getDataBeans() throws XeroClientException, XeroClientUnexpectedException {
 //    	
