@@ -124,6 +124,33 @@ public class XeroClient {
         return arrayOfT;
     }
     
+	public ArrayOfInvoice getLastInvoices(String invoiceNum)
+			throws XeroClientException, XeroClientUnexpectedException {
+
+		ArrayOfInvoice t = new ArrayOfInvoice();
+		OAuthMessage response = null;
+		String paraId = "";
+		if (invoiceNum == null || (invoiceNum.trim().equals("")))
+			invoiceNum = "INV-API-ABCD";
+
+		try {
+			OAuthClient client = new OAuthClient(new HttpClient3());
+			OAuthAccessor accessor = buildAccessor();
+		
+			response = client.invoke(accessor, OAuthMessage.GET, endpointUrl
+					+ "Invoices?where=InvoiceNumber.StartsWith%28%22” + invoiceNum  + “%22%29&order=InvoiceNumber%20desc", null);
+			
+			t = XeroXmlManager.xmlToBeans(t, response.getBodyAsStream());
+
+		} catch (OAuthProblemException ex) {
+			logger.fatal(ex);
+			throw new XeroClientException(ex.getMessage(), ex);
+		} catch (Exception ex) {
+			logger.fatal(ex.getMessage());
+			throw new XeroClientUnexpectedException(ex.getMessage(), ex);
+		}
+		return t;
+	}	
     public Report getReport(String reportUrl) throws XeroClientException, XeroClientUnexpectedException {
         Report report = null;
         try {
